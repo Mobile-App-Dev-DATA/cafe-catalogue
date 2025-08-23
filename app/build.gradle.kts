@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -36,7 +37,13 @@ android {
 }
 
 dependencies {
+    val lifecycle_version = "2.9.2"
+    val arch_version = "2.2.0"
 
+    // Viewmodel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle_version}")
+    // Live data
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle_version}")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
