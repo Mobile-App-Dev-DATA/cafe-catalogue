@@ -61,4 +61,8 @@ class CafeList {
 
         return filteredList
     }
+
+    fun size(): Int{
+        return cafes.value.orEmpty().size
+    }
 }
