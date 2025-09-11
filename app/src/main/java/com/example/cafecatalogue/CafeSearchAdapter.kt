@@ -4,8 +4,8 @@ import android.content.Context
 import android.widget.ArrayAdapter
 import android.widget.Filter
 
-class CafeSearchAdapter(context: Context, reasource:Int, cafes: List<Cafe>) :
-    ArrayAdapter<Cafe>(context, reasource, cafes) {
+class CafeSearchAdapter(context: Context, reasourse:Int, cafes: List<Cafe>) :
+    ArrayAdapter<Cafe>(context, reasourse, cafes) {
 
     private val allCafes = ArrayList(cafes)
 
