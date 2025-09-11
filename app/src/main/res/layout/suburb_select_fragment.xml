@@ -3,6 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
+        Note for Darren:
+        in order to read the state of the checkboxes, get the check box objects
+        (findViewById), then use checkBox.isChecked
+    -->
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
