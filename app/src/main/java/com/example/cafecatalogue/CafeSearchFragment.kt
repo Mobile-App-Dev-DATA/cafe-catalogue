@@ -44,4 +44,8 @@ class CafeSearchFragment(private val cafes: ArrayList<Cafe>) : Fragment() {
         })
         return view
     }
+
+    fun updateSuburbFilter(suburbs: Set<Suburb>) {
+        listAdapter.setSuburbFilter(suburbs)
+    }
 }

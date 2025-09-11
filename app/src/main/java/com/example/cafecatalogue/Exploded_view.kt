@@ -45,7 +45,7 @@ class Exploded_view : AppCompatActivity() {
         cafe_name.text = name
         cafe_suburb.text = suburb.toString() // Will this print only one or entire enum??????????
         cafe_description.text = description
-
+/*
         // Display photo
         when(name?.lowercase())
         {
@@ -62,7 +62,7 @@ class Exploded_view : AppCompatActivity() {
             "common grounds" -> cafe_image.setImageResource(R.drawable.common)
             "basement cafe" -> cafe_image.setImageResource(R.drawable.basement) //TODO
         }
-
+*/
         // Favourite button
         favourite_button.setOnClickListener()
         {

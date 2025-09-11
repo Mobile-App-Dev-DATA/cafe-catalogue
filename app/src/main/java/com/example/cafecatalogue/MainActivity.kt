@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var searchFragment: CafeSearchFragment
     private lateinit var cafeListView: ListView
     private lateinit var cafeSearchBar: SearchView
     private lateinit var listAdapter: CafeSearchAdapter
@@ -27,9 +28,11 @@ class MainActivity : AppCompatActivity() {
 
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
+        searchFragment = CafeSearchFragment(CafeList.generate())
+
         val pageFragments = listOf(
             SuburbSelectFragment(),
-            CafeSearchFragment(CafeList.generate())
+            searchFragment
         )
 
         pageView.adapter = object : FragmentStateAdapter(this) {
@@ -38,5 +41,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         pageView.currentItem = 1
+    }
+
+    fun updateSuburbFilter(suburb: Set<Suburb>) {
+        searchFragment.updateSuburbFilter(suburb)
     }
 }
