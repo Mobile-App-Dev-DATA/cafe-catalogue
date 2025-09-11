@@ -31,8 +31,6 @@ class Exploded_view : AppCompatActivity() {
 
         // Obtain cafe object
         val receivedCafe = intent.getParcelableExtra<Cafe>("cafe")
-        // Obtain favourite cafe list
-        // TODO
 
         // 1. Obtain cafe name
         val name = receivedCafe?.name
@@ -60,15 +58,14 @@ class Exploded_view : AppCompatActivity() {
             "cafe guilty pleasure" -> cafe_image.setImageResource(R.drawable.guilty)
             "secondeli cafe" -> cafe_image.setImageResource(R.drawable.secondeli)
             "common grounds" -> cafe_image.setImageResource(R.drawable.common)
-            "basement cafe" -> cafe_image.setImageResource(R.drawable.basement) //TODO
+            "basement cafe" -> cafe_image.setImageResource(R.drawable.basement) //TODO Test
         }
 
         // Favourite button
         favourite_button.setOnClickListener()
         {
-            // Update favourite field in cafe!!!!!!!!!!!!!!!!!!!!!!!!
-
-
+            // Update favourite field in cafe!!!!!!!!!!!!!!!!!!!!!!!
+            favouriteVM.observe
         }
 
 

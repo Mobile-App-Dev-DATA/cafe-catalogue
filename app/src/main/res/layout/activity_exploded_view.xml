@@ -62,8 +62,6 @@
                     android:layout_column="4"
                     android:layout_row="1"
                     android:id="@+id/favourite_button"/>
-
-
             </GridLayout>
 
             <TextView
