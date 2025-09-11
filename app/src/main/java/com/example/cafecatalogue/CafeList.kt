@@ -25,8 +25,8 @@ class CafeList {
     fun add(cafe:Cafe){
         cafes.value = cafes.value.orEmpty() + cafe
     }
-    fun add(name:String, suburb:Suburb, description:String, image:Drawable){
-        add(Cafe(name, suburb, description, image))
+    fun add(name:String, suburb:Suburb, description:String){
+        add(Cafe(name, suburb, description))
     }
 
     fun setOnlyShowFavourites(v:Boolean){
