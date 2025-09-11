@@ -9,6 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,32 +25,18 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        cafeListView = findViewById(R.id.SearchList)
-        cafeSearchBar = findViewById(R.id.searchBar)
+        val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
-        cafeList = ArrayList()
-        cafeList.add(Cafe("home cafe", Suburb.BENTLEY, "a nice homely cafe", true))
-        cafeList.add(Cafe("hommie spot", Suburb.NEDLANDS, "a spot for the hommies to drink coffee", true))
-        cafeList.add(Cafe("shit cafe", Suburb.FREMANTLE, "a shit cafe.  do not go here", false))
-        cafeList.add(Cafe("imposter cafe", Suburb.WILSON, "kinda sus", false))
-
-        listAdapter = CafeSearchAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            cafeList
+        val pageFragments = listOf(
+            SuburbSelectFragment(),
+            CafeSearchFragment(CafeList.generate())
         )
-        cafeListView.adapter = listAdapter
 
-        cafeSearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(this@MainActivity, "searched for $query", Toast.LENGTH_LONG)
-                    .show()
-                return false
-            }
-            override fun onQueryTextChange(query: String?): Boolean {
-                listAdapter.filter.filter(query)
-                return false
-            }
-        })
+        pageView.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = pageFragments.size
+            override fun createFragment(position: Int) = pageFragments[position]
+        }
+
+        pageView.currentItem = 1
     }
 }
