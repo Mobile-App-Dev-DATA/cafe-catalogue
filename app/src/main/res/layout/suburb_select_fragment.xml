@@ -8,40 +8,33 @@
         android:layout_height="match_parent"
         android:columnCount="2"
         >
-        <TextView
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkBox_FREMANTLE"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-            android:text="bruh"
+            android:text="Fremantle"
             />
-        <TextView
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkBox_NEDLANDS"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-            android:text="bruh"
+            android:text="Nedlands"
             />
-        <TextView
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkBox_WILSON"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-            android:text="bruh"
+            android:text="Wilson"
             />
-        <TextView
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkBox_BENTLEY"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-            android:text="bruh"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bruh"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bruh"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="bruh"
+            android:text="Bentley"
             />
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
