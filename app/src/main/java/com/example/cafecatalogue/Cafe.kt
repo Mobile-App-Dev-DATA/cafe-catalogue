@@ -1,3 +1,7 @@
 package com.example.cafecatalogue
+import android.os.Parcel
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-data class Cafe(val name:String, val suburb:Suburb, val description:String)
+@Parcelize
+data class Cafe(val name:String, val suburb:Suburb, val description:String) : Parcelable

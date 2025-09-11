@@ -10,7 +10,7 @@ class CafeList {
     init {
         add("Hinata Cafe", Suburb.FREMANTLE, "TODO")
         add("Kith Eatery", Suburb.NEDLANDS, "TODO")
-        add("Lo Quay River Cafe", Suburb.WILSON,
+        add("Cheol's Cafe", Suburb.MTLAWLEY,
             "A scenic cafe by the river with an indoors and outdoors area to enjoy the view of swans flying by and birds spying for some food. During winter, outdoor heating appliances are provided to warm guests under their veranda, allowing a free open space for chats with family and mates. It looks amazing but that’s about it, the food was not the greatest thing in the world.\n" +
                     "\n" +
                     "1/5 food and drinks\n" +
