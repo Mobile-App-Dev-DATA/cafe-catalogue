@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Exploded_view">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,70 +20,62 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/cafe_name"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="28"
-                    android:hint="Cafe Name"/>
-
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:height="3dp"
-                    android:layout_weight="5"
-                    android:text="X"
-                    android:id="@+id/back_button"/>
-            </LinearLayout>
-
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
                 android:rowCount="2"
                 android:columnCount="5">
+
                 <TextView
+                    android:id="@+id/cafe_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/cafe_location"
-                    android:hint="location"
-                    android:layout_columnSpan="2"/>
+                    android:layout_columnSpan="3"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:hint="Cafe Name"
+                    android:textSize="44sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cafe_opening"
-                    android:hint="opening hours"
-                    android:layout_columnSpan="2"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cafe_suburb"
+                    android:hint="suburb"
                     android:layout_row="1"
-                    android:layout_column="0"/>
+                    android:layout_column="0"
+                    android:layout_columnSpan="3"
+                    android:layout_gravity="top"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:layout_column="4"
+                    android:layout_row="0"
+                    android:id="@+id/back_button"
+                    android:layout_gravity="top|end"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_rowSpan="2"
-                    android:layout_columnSpan="1"
-                    android:layout_row="0"
                     android:text="Add to fave"
+                    android:layout_column="4"
+                    android:layout_row="1"
                     android:id="@+id/favourite_button"/>
-            </GridLayout>
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/photo_scrollview">
-            </HorizontalScrollView>
+
+            </GridLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Description"
                 android:id="@+id/cafe_description"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cafe_image"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

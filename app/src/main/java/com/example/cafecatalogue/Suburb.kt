@@ -1,5 +1,5 @@
 package com.example.cafecatalogue
 
 enum class Suburb {
-    FREMANTLE, NEDLANDS, WILSON, BENTLEY
+    FREMANTLE, NEDLANDS, MTLAWLEY, BENTLEY
 }
