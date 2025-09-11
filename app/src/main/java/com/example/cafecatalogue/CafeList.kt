@@ -1,11 +1,13 @@
 package com.example.cafecatalogue
 
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class CafeList {
 
     private val cafes = MutableLiveData<List<Cafe>>(emptyList())
+    private var onlyShowFavourites:Boolean = false
 
     init {
         add("Hinata Cafe", Suburb.FREMANTLE, "TODO")
@@ -25,6 +27,13 @@ class CafeList {
     }
     fun add(name:String, suburb:Suburb, description:String){
         add(Cafe(name, suburb, description))
+    }
+
+    fun setOnlyShowFavourites(v:Boolean){
+        onlyShowFavourites = v
+    }
+    fun getOnlyShowFavourites(v:Boolean): Boolean{
+        return onlyShowFavourites
     }
 
     fun get(): List<Cafe> {
@@ -55,7 +64,9 @@ class CafeList {
 
         cafes.value.orEmpty().forEach {
             if (it.name.contains(nameFilter) && suburbFilter.contains(it.suburb)) {
-                filteredList.add(it)
+                if (!onlyShowFavourites || it.isFavourite) {
+                    filteredList.add(it)
+                }
             }
         }
 
