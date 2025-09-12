@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
         searchFragment = CafeSearchFragment(CafeList.generate())
+        searchFragment.setRetainInstance(true)
 
         val pageFragments = listOf(
             SuburbSelectFragment(),
