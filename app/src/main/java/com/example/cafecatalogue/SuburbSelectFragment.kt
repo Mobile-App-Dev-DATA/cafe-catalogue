@@ -18,6 +18,7 @@ class SuburbSelectFragment : Fragment() {
     private lateinit var checkBoxNedlands:CheckBox
     private lateinit var checkBoxWilson:CheckBox
     private lateinit var checkBoxBentley:CheckBox
+    private lateinit var checkBoxFavourites:CheckBox
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +30,7 @@ class SuburbSelectFragment : Fragment() {
         checkBoxNedlands = view.findViewById<CheckBox>(R.id.checkBox_NEDLANDS)
         checkBoxWilson = view.findViewById<CheckBox>(R.id.checkBox_WILSON)
         checkBoxBentley = view.findViewById<CheckBox>(R.id.checkBox_BENTLEY)
-
+        checkBoxFavourites = view.findViewById<CheckBox>(R.id.checkBox_FAVOURITES)
 
         val updateFilter = {
             val selected = mutableSetOf<Suburb>()
@@ -47,12 +48,14 @@ class SuburbSelectFragment : Fragment() {
             Log.d("Suburb select fragment", message)
             viewModel.setSuburbs(selected)
             Log.d("Suburb select fragment","view model data query:${viewModel.query.value} :: suburbs:${viewModel.suburbs.value}")
+            viewModel.setFavouritesOnly(checkBoxFavourites.isChecked)
         }
 
         checkBoxFremantle.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxNedlands.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxWilson.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxBentley.setOnCheckedChangeListener { _, _ -> updateFilter() }
+        checkBoxFavourites.setOnCheckedChangeListener { _, _ -> updateFilter() }
         return view
     }
 }

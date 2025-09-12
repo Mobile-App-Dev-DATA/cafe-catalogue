@@ -10,10 +10,17 @@ class CafeSearchAdapter(context: Context, resource:Int, cafes: List<Cafe>) : Arr
     private val allCafes = ArrayList(cafes)
     private var selectedSuburbs: Set<Suburb> = emptySet()
     private var query = ""
+    private var favouritesOnly: Boolean = false
 
     fun setSuburbFilter(suburbs: Set<Suburb>){
         Log.d("Search adapter","suburbs set to $suburbs")
         selectedSuburbs = suburbs
+        filter.filter(query)
+        notifyDataSetChanged()
+    }
+
+    fun setFavouritesFilter(enabled:Boolean) {
+        favouritesOnly =enabled
         filter.filter(query)
         notifyDataSetChanged()
     }
@@ -33,7 +40,9 @@ class CafeSearchAdapter(context: Context, resource:Int, cafes: List<Cafe>) : Arr
                     val matchesSuburb = selectedSuburbs.isEmpty() ||
                             selectedSuburbs.contains(cafe.suburb)
 
-                    matchesQuery && matchesSuburb
+                    val matchesFavourite = !favouritesOnly || cafe.isFavourite
+
+                    matchesQuery && matchesSuburb && matchesFavourite
                 }
                 results.values = filtered
                 results.count = filtered.size
