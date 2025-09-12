@@ -67,6 +67,11 @@ class CafeSearchFragment(private val cafes: ArrayList<Cafe>) : Fragment() {
             Log.d("Search fragment","view model data suburbs:${viewModel.suburbs.value}")
         }
 
+        viewModel.favouritesOnly.observe(viewLifecycleOwner) { enabled ->
+            listAdapter.setFavouritesFilter(enabled)
+            Log.d("Search fragment","view model data favourites:${viewModel.favouritesOnly.value}")
+        }
+
         return view
     }
 }
