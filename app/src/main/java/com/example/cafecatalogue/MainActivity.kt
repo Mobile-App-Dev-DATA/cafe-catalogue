@@ -1,6 +1,7 @@
 package com.example.cafecatalogue
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.SearchView
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cafeList: ArrayList<Cafe>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("activity creation","creating main activity instance")
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
