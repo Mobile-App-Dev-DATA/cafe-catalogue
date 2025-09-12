@@ -7,23 +7,34 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import android.widget.CheckBox
 import android.util.Log
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 
 class SuburbSelectFragment : Fragment() {
+
+    private val viewModel:SearchVM by activityViewModels()
+    private lateinit var checkBoxFremantle:CheckBox
+    private lateinit var checkBoxNedlands:CheckBox
+    private lateinit var checkBoxWilson:CheckBox
+    private lateinit var checkBoxBentley:CheckBox
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.suburb_select_fragment, container, false)
 
-        val checkBoxFremantle = view.findViewById<CheckBox>(R.id.checkBox_FREMANTLE)
-        val checkboxNedlands = view.findViewById<CheckBox>(R.id.checkBox_NEDLANDS)
-        val checkBoxWilson = view.findViewById<CheckBox>(R.id.checkBox_WILSON)
-        val checkBoxBentley = view.findViewById<CheckBox>(R.id.checkBox_BENTLEY)
+        checkBoxFremantle = view.findViewById<CheckBox>(R.id.checkBox_FREMANTLE)
+        checkBoxNedlands = view.findViewById<CheckBox>(R.id.checkBox_NEDLANDS)
+        checkBoxWilson = view.findViewById<CheckBox>(R.id.checkBox_WILSON)
+        checkBoxBentley = view.findViewById<CheckBox>(R.id.checkBox_BENTLEY)
+
 
         val updateFilter = {
             val selected = mutableSetOf<Suburb>()
             if (checkBoxFremantle.isChecked) selected.add(Suburb.FREMANTLE)
-            if (checkboxNedlands.isChecked) selected.add(Suburb.NEDLANDS)
+            if (checkBoxNedlands.isChecked) selected.add(Suburb.NEDLANDS)
             if (checkBoxWilson.isChecked) selected.add(Suburb.WILSON)
             if (checkBoxBentley.isChecked) selected.add(Suburb.BENTLEY)
 
@@ -33,16 +44,15 @@ class SuburbSelectFragment : Fragment() {
             } else {
                 "selected suburbs: ${selected.joinToString(", ")}"
             }
-            Log.d("SuburbFilter", message)
-
-            (activity as? MainActivity)?.updateSuburbFilter(selected)
+            Log.d("Suburb select fragment", message)
+            viewModel.setSuburbs(selected)
+            Log.d("Suburb select fragment","view model data query:${viewModel.query.value} :: suburbs:${viewModel.suburbs.value}")
         }
 
         checkBoxFremantle.setOnCheckedChangeListener { _, _ -> updateFilter() }
-        checkboxNedlands.setOnCheckedChangeListener { _, _ -> updateFilter() }
+        checkBoxNedlands.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxWilson.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxBentley.setOnCheckedChangeListener { _, _ -> updateFilter() }
-
         return view
     }
 }

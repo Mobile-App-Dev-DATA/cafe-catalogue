@@ -3,6 +3,7 @@ package com.example.cafecatalogue
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.Toast
@@ -38,15 +39,12 @@ class MainActivity : AppCompatActivity() {
             searchFragment
         )
 
+
         pageView.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount() = pageFragments.size
             override fun createFragment(position: Int) = pageFragments[position]
         }
 
         pageView.currentItem = 1
-    }
-
-    fun updateSuburbFilter(suburbs: Set<Suburb>) {
-        searchFragment.updateSuburbFilter(suburbs)
     }
 }
