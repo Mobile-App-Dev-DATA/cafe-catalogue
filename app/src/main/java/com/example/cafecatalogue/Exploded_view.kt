@@ -42,6 +42,9 @@ class Exploded_view : AppCompatActivity() {
         // Display name, suburb, description
         cafe_name.text = name
         cafe_suburb.text = suburb.toString() // Will this print only one or entire enum??????????
+                                             // Should just print the one.  Suburb is an instance
+                                             // of the suburb class ie one of the not the entire
+                                             // enum values not the entire class
         cafe_description.text = description
 /*
         // Display photo
@@ -61,13 +64,14 @@ class Exploded_view : AppCompatActivity() {
             "basement cafe" -> cafe_image.setImageResource(R.drawable.basement) //TODO Test
         }
 */
+        /*
         // Favourite button
         favourite_button.setOnClickListener()
         {
             // Update favourite field in cafe!!!!!!!!!!!!!!!!!!!!!!!
             favouriteVM.observe
         }
-
+        */
 
         // Back button
         back_button.setOnClickListener()

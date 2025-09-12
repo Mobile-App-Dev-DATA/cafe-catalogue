@@ -1,18 +1,17 @@
 package com.example.cafecatalogue
 
 import android.content.Context
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Filter
 
-class CafeSearchAdapter(context: Context, resource:Int, cafes: List<Cafe>) :
-    ArrayAdapter<Cafe>(context, resource, cafes) {
+class CafeSearchAdapter(context: Context, resource:Int, cafes: List<Cafe>) : ArrayAdapter<Cafe>(context, resource, cafes) {
 
     private val allCafes = ArrayList(cafes)
     private var selectedSuburbs: Set<Suburb> = emptySet()
 
     fun setSuburbFilter(suburbs: Set<Suburb>){
         selectedSuburbs = suburbs
-        filter.filter("")
     }
 
     override fun getFilter(): Filter {
@@ -21,6 +20,7 @@ class CafeSearchAdapter(context: Context, resource:Int, cafes: List<Cafe>) :
                 val results = FilterResults()
                 val query = constraint?.toString()?.lowercase() ?: ""
 
+                Log.i("Search function","filtering by query $query across suburbs $selectedSuburbs")
                 val filtered = allCafes.filter { cafe ->
                     val matchesQuery = query.isEmpty() ||
                             cafe.name.lowercase().contains(query) ||

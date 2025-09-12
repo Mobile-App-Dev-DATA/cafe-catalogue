@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         pageView.currentItem = 1
     }
 
-    fun updateSuburbFilter(suburb: Set<Suburb>) {
-        searchFragment.updateSuburbFilter(suburb)
+    fun updateSuburbFilter(suburbs: Set<Suburb>) {
+        searchFragment.updateSuburbFilter(suburbs)
     }
 }

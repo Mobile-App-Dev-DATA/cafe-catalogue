@@ -15,6 +15,7 @@ class CafeSearchFragment(private val cafes: ArrayList<Cafe>) : Fragment() {
     private lateinit var cafeSearchBar: SearchView
     private lateinit var listAdapter: CafeSearchAdapter
     private lateinit var cafeList: ArrayList<Cafe>
+    private var cachedQuery: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +35,13 @@ class CafeSearchFragment(private val cafes: ArrayList<Cafe>) : Fragment() {
 
         cafeSearchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(requireContext(), "Searched for $query", Toast.LENGTH_LONG).show()
+                cachedQuery = query?:""
+                Toast.makeText(requireContext(), "Searched for $cachedQuery", Toast.LENGTH_LONG).show()
                 return false
             }
             override fun onQueryTextChange(query:String?): Boolean {
-                listAdapter.filter.filter(query)
+                cachedQuery = query?:""
+                listAdapter.filter.filter(cachedQuery)
                 return false
             }
         })
@@ -46,6 +49,13 @@ class CafeSearchFragment(private val cafes: ArrayList<Cafe>) : Fragment() {
     }
 
     fun updateSuburbFilter(suburbs: Set<Suburb>) {
+        listAdapter = CafeSearchAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            cafes
+        )
         listAdapter.setSuburbFilter(suburbs)
+        listAdapter.filter.filter(cachedQuery)
+        cafeListView.adapter = listAdapter
     }
 }
