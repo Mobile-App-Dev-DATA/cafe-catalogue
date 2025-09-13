@@ -4,6 +4,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
+    <LinearLayout
+        android:id="@+id/clickableSpace"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        >
     <TextView
         android:id="@+id/CafeName"
         android:layout_width="wrap_content"
@@ -15,6 +21,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         />
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

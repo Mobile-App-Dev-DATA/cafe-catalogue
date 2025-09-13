@@ -24,6 +24,8 @@ class SearchVM : ViewModel() {
     private val _suburbs = MutableLiveData<Set<Suburb>>(emptySet())
     val suburbs: LiveData<Set<Suburb>> = _suburbs
 
+    val selectedCafe = MutableLiveData<Cafe>(null)
+
     fun setSuburbs(s:Set<Suburb>) {
         filterCafeList(query.value?:"",s)
         _suburbs.value = s
@@ -45,6 +47,10 @@ class SearchVM : ViewModel() {
         if(showingOnlyFavourites){
             filterCafeList()
         }
+    }
+
+    fun updateFavouriteList(newFavourites:ArrayList<String>){
+        _favouriteCafeList.value = newFavourites
     }
 
     fun showOnlyFavourites(b:Boolean){

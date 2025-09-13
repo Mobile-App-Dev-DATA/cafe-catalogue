@@ -2,16 +2,9 @@ package com.example.cafecatalogue
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.SearchView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 
@@ -25,6 +18,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val favouriteList = savedInstanceState?.getStringArrayList("favourites")?:ArrayList<String>()
+
+        val viewModel:SearchVM by viewModels()
+        viewModel.updateFavouriteList(favouriteList)
+
 
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
@@ -45,5 +44,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         pageView.currentItem = 1
+
+        viewModel.selectedCafe.observe(this) {
+            /*
+             * the comments are code that will only be able to work once the exploded view is written
+             */
+            val selectedCafe = viewModel.selectedCafe.value
+            if (selectedCafe == null){
+                Log.e("Main activity - activity change","the selected cafe resolved to null.  this should not be possible")
+            }else{
+                //val intent:Intent = Intent(this, ExplodedActivity::class.java)
+                val bundle:Bundle = Bundle()
+                bundle.putStringArrayList("favourites",viewModel.favouriteCafeList.value)
+                bundle.putParcelable("cafe",selectedCafe)
+                Log.i("Main activity - activity change","swapping to the exploded activity with data $bundle")
+                //intent.putExtras(bundle)
+                //startActivity(intent)
+            }
+        }
     }
 }
