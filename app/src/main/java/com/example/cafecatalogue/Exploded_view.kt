@@ -21,6 +21,7 @@ class Exploded_view : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         // Get xml data
         val cafe_name = findViewById<TextView>(R.id.cafe_name)
         val cafe_suburb = findViewById<TextView>(R.id.cafe_suburb)
@@ -31,6 +32,8 @@ class Exploded_view : AppCompatActivity() {
 
         // Obtain cafe object
         val receivedCafe = intent.getParcelableExtra<Cafe>("cafe")
+        // Favourite VM
+        val favouriteVM : FavouriteVM by activityViewModels()
 
         // 1. Obtain cafe name
         val name = receivedCafe?.name
@@ -69,7 +72,10 @@ class Exploded_view : AppCompatActivity() {
         favourite_button.setOnClickListener()
         {
             // Update favourite field in cafe!!!!!!!!!!!!!!!!!!!!!!!
-            favouriteVM.observe
+            favouriteVM.observe(viewLifecycleOwner)
+            {
+
+            }
         }
         */
 
