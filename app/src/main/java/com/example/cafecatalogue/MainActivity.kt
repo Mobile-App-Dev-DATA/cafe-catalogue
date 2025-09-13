@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             if (selectedCafe == null){
                 Log.e("Main activity - activity change","the selected cafe resolved to null.  this should not be possible")
             }else{
-                //val intent:Intent = Intent(this, ExplodedActivity::class.java)
+                val intent:Intent = Intent(this, Exploded_view::class.java)
                 val bundle:Bundle = Bundle()
                 bundle.putStringArrayList("favourites",viewModel.favouriteCafeList.value)
                 bundle.putParcelable("cafe",selectedCafe)

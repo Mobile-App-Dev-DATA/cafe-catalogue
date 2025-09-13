@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CafeCatalogue">
         <activity
-            android:name=".exploded_view"
+            android:name=".Exploded_view"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

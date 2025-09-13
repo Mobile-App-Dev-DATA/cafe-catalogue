@@ -1,6 +1,5 @@
 package com.example.cafecatalogue
 
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -13,6 +12,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
+import android.widget.Button
+import android.util.Log
+
 
 class Exploded_view : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,37 +28,67 @@ class Exploded_view : AppCompatActivity() {
             insets
         }
 
+        Log.d("ExplodedView", "Activity started")
+
         // Get xml data
         val cafe_name = findViewById<TextView>(R.id.cafe_name)
         val cafe_suburb = findViewById<TextView>(R.id.cafe_suburb)
         val cafe_description = findViewById<TextView>(R.id.cafe_description)
         val cafe_image = findViewById<ImageView>(R.id.cafe_image)
-        val favourite_button = findViewById<TextView>(R.id.favourite_button)
-        val back_button = findViewById<TextView>(R.id.back_button)
+        val favourite_button = findViewById<Button>(R.id.favourite_button)
+        val back_button = findViewById<Button>(R.id.back_button)
 
-        // Obtain cafe object
-        val receivedCafe = intent.getParcelableExtra<Cafe>("cafe")
+        Log.d("ExplodedView", "Views found successfully")
+
+        // Obtain cafe object from bundle
+        val bundle = intent.extras
+        Log.d("ExplodedView", "Bundle: $bundle")
+
+        val receivedCafe = bundle?.getParcelable<Cafe>("cafe")
+        val receievedFavourite = bundle?.getStringArrayList("favourites")
+
+        Log.d("ExplodedView", "Received cafe: $receivedCafe")
+        Log.d("ExplodedView", "Received favourites: $receievedFavourite")
+
+        if (receivedCafe == null) {
+            Log.e("ExplodedView", "Cafe object is null!")
+            finish()
+            return
+        }
+
+        Log.d("ExplodedView", "Cafe object is valid, proceeding...")
+
         // Favourite VM and favourite list
-        val receievedFavourite = intent.getStringArrayListExtra("favourites")
         val favouriteVM : FavouriteVM by viewModels()
 
-        // 1. Obtain cafe name
-        val name = receivedCafe?.name
-        // 2. Obtain cafe suburb
-        val suburb = receivedCafe?.suburb
-        // 3. Obtain cafe description
-        val description = receivedCafe?.description
+        // Extract data from cafe object
+        val name = receivedCafe.name
+        val suburb = receivedCafe.suburb
+        val description = receivedCafe.description
 
-        // Display name, suburb, description
-        cafe_name.text = name
-        cafe_suburb.text = suburb.toString() // Will this print only one or entire enum??????????
-                                             // Should just print the one.  Suburb is an instance
-                                             // of the suburb class ie one of the not the entire
-                                             // enum values not the entire class
-        cafe_description.text = description
+        Log.d("ExplodedView", "Cafe name: $name")
+        Log.d("ExplodedView", "Cafe suburb: $suburb")
+        Log.d("ExplodedView", "Cafe description: $description")
+
+        // Check if name is null
+        if (name == null) {
+            Log.e("ExplodedView", "Cafe name is null!")
+            cafe_name.text = "Unknown Cafe"
+        } else {
+            cafe_name.text = name
+        }
+
+        // Display suburb and description
+        cafe_suburb.text = suburb?.toString() ?: "Unknown Suburb"
+        cafe_description.text = description ?: "No description available"
+
+        Log.d("ExplodedView", "Text fields set successfully")
+
         // Display photo
-        when(name?.lowercase())
-        {
+        val cafeName = name?.lowercase()
+        Log.d("ExplodedView", "Looking for image for: $cafeName")
+
+        when(cafeName) {
             "hinata cafe" -> cafe_image.setImageResource(R.drawable.hinata)
             "kith eatery" -> cafe_image.setImageResource(R.drawable.kith)
             "sinnamon" -> cafe_image.setImageResource(R.drawable.sinnamon)
@@ -67,37 +100,36 @@ class Exploded_view : AppCompatActivity() {
             "cafe guilty pleasure" -> cafe_image.setImageResource(R.drawable.guilty)
             "secondeli cafe" -> cafe_image.setImageResource(R.drawable.secondeli)
             "common grounds" -> cafe_image.setImageResource(R.drawable.common)
-            "basement cafe" -> cafe_image.setImageResource(R.drawable.basement) //TODO Test
-        }
-        // Favourite button
-        favourite_button.setOnClickListener()
-        {
-            // Update favourite field in cafe!!!!!!!!!!!!!!!!!!!!!!!
-
-            if(receievedFavourite?.contains(name) == true)
-            {
-                favouriteVM.setFavourite(receivedCafe, false)
+            "basement cafe" -> cafe_image.setImageResource(R.drawable.basement)
+            else -> {
+                Log.d("ExplodedView", "No matching image found for: $cafeName, using default")
+                cafe_image.setImageResource(R.drawable.basement)
             }
-            else
-            {
+        }
+
+        Log.d("ExplodedView", "Image set successfully")
+
+        // Favourite button
+        favourite_button.setOnClickListener {
+            Log.d("ExplodedView", "Favourite button clicked")
+
+            if(receievedFavourite?.contains(name) == true) {
+                favouriteVM.setFavourite(receivedCafe, false)
+                Log.d("ExplodedView", "Removed from favourites")
+            } else {
                 favouriteVM.setFavourite(receivedCafe, true)
+                Log.d("ExplodedView", "Added to favourites")
             }
         }
 
         // Back button
-        back_button.setOnClickListener()
-        {
-            // Put cafe object in intent
+        back_button.setOnClickListener {
+            Log.d("ExplodedView", "Back button clicked")
+
             val intent = Intent(this, MainActivity::class.java)
-
-            // Put favourite in intent
-            val bundle:Bundle = Bundle()
-            bundle.putStringArrayList("favourites", favouriteVM.favourite_set.value)
-            bundle.putParcelable("cafe", receivedCafe)
-
-            // Start main activity
+            intent.putStringArrayListExtra("favourites", favouriteVM.favourite_set.value)
+            intent.putExtra("cafe", receivedCafe)
             startActivity(intent)
         }
-
     }
 }
