@@ -18,10 +18,7 @@ import androidx.viewpager2.widget.ViewPager2
 class MainActivity : AppCompatActivity() {
 
     private lateinit var searchFragment: CafeSearchFragment
-    private lateinit var cafeListView: ListView
-    private lateinit var cafeSearchBar: SearchView
-    private lateinit var listAdapter: CafeSearchAdapter
-    private lateinit var cafeList: ArrayList<Cafe>
+    private lateinit var suburbSelectFragment: SuburbSelectFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("activity creation","creating main activity instance")
@@ -31,11 +28,13 @@ class MainActivity : AppCompatActivity() {
 
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
-        searchFragment = CafeSearchFragment(CafeList.generate())
+        searchFragment = CafeSearchFragment()
         searchFragment.setRetainInstance(true)
 
+        suburbSelectFragment = SuburbSelectFragment()
+
         val pageFragments = listOf(
-            SuburbSelectFragment(),
+            suburbSelectFragment,
             searchFragment
         )
 

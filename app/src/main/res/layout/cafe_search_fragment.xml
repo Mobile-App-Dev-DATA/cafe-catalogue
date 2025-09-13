@@ -7,15 +7,32 @@
     android:orientation="vertical"
     android:layout_marginTop="20dp"
     >
-    <SearchView
-        android:id='@+id/searchBar'
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:iconifiedByDefault="false"
-        android:background="@drawable/black_border"
-        />
-    <ListView
+        android:orientation="horizontal"
+        >
+        <SearchView
+            android:id='@+id/searchBar'
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:iconifiedByDefault="false"
+            android:background="@drawable/black_border"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="filt fav"
+            />
+        <CheckBox
+            android:id="@+id/favouriteFilterBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
         android:id='@+id/SearchList'
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

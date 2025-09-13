@@ -3,4 +3,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Favourite(val name:String, val isFavourite:Boolean) : Parcelable
+data class Favourite(val name:String) : Parcelable
