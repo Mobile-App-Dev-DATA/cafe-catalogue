@@ -6,10 +6,77 @@ class CafeList {
     companion object {
         fun generate(): ArrayList<Cafe> {
             val outList = ArrayList<Cafe>()
-            outList.add(Cafe("home cafe", Suburb.BENTLEY, "a nice homely cafe"))
-            outList.add(Cafe("hommie spot", Suburb.NEDLANDS, "a spot for the hommies to drink coffee"))
-            outList.add(Cafe("shit cafe", Suburb.FREMANTLE, "a shit cafe.  do not go here"))
-            outList.add(Cafe("imposter cafe", Suburb.MTLAWLEY, "kinda sus"))
+            outList.add(Cafe(
+                "Hinata Cafe",
+                Suburb.FREMANTLE,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Rustic Spoon Cafe",
+                Suburb.FREMANTLE,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Gesha Cafe",
+                Suburb.FREMANTLE,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Cafe Guilty Pleasure",
+                Suburb.MTLAWLEY,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Cheol's Cafe",
+                Suburb.MTLAWLEY,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Secondeli Cafe",
+                Suburb.MTLAWLEY,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Boubar",
+                Suburb.NEDLANDS,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Kith Eatery",
+                Suburb.NEDLANDS,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Tiamo Cafe",
+                Suburb.NEDLANDS,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Sinnamon",
+                Suburb.BENTLEY,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Common Grounds",
+                Suburb.BENTLEY,
+                ""
+            ))
+
+            outList.add(Cafe(
+                "Basement Cafe",
+                Suburb.BENTLEY,
+                ""
+            ))
             return outList
         }
     }

@@ -58,8 +58,8 @@ class MainActivity : AppCompatActivity() {
                 bundle.putStringArrayList("favourites",viewModel.favouriteCafeList.value)
                 bundle.putParcelable("cafe",selectedCafe)
                 Log.i("Main activity - activity change","swapping to the exploded activity with data $bundle")
-                //intent.putExtras(bundle)
-                //startActivity(intent)
+                intent.putExtras(bundle)
+                startActivity(intent)
             }
         }
     }

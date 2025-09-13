@@ -7,9 +7,12 @@ import android.os.Parcelable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 
 class Exploded_view : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +35,9 @@ class Exploded_view : AppCompatActivity() {
 
         // Obtain cafe object
         val receivedCafe = intent.getParcelableExtra<Cafe>("cafe")
-        // Favourite VM
-        val favouriteVM : FavouriteVM by activityViewModels()
+        // Favourite VM and favourite list
+        val receievedFavourite = intent.getStringArrayListExtra("favourites")
+        val favouriteVM : FavouriteVM by viewModels()
 
         // 1. Obtain cafe name
         val name = receivedCafe?.name
@@ -49,7 +53,6 @@ class Exploded_view : AppCompatActivity() {
                                              // of the suburb class ie one of the not the entire
                                              // enum values not the entire class
         cafe_description.text = description
-/*
         // Display photo
         when(name?.lowercase())
         {
@@ -66,18 +69,20 @@ class Exploded_view : AppCompatActivity() {
             "common grounds" -> cafe_image.setImageResource(R.drawable.common)
             "basement cafe" -> cafe_image.setImageResource(R.drawable.basement) //TODO Test
         }
-*/
-        /*
         // Favourite button
         favourite_button.setOnClickListener()
         {
             // Update favourite field in cafe!!!!!!!!!!!!!!!!!!!!!!!
-            favouriteVM.observe(viewLifecycleOwner)
-            {
 
+            if(receievedFavourite?.contains(name) == true)
+            {
+                favouriteVM.setFavourite(receivedCafe, false)
+            }
+            else
+            {
+                favouriteVM.setFavourite(receivedCafe, true)
             }
         }
-        */
 
         // Back button
         back_button.setOnClickListener()
@@ -86,6 +91,9 @@ class Exploded_view : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
 
             // Put favourite in intent
+            val bundle:Bundle = Bundle()
+            bundle.putStringArrayList("favourites", favouriteVM.favourite_set.value)
+            bundle.putParcelable("cafe", receivedCafe)
 
             // Start main activity
             startActivity(intent)
