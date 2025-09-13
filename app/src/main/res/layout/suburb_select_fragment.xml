@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        >
+        <CheckBox
+            android:id="@+id/checkBox_FREMANTLE"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="Fremantle"
+            />
+        <CheckBox
+            android:id="@+id/checkBox_NEDLANDS"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="Nedlands"
+            />
+        <CheckBox
+            android:id="@+id/checkBox_WILSON"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="Wilson"
+            />
+        <CheckBox
+            android:id="@+id/checkBox_BENTLEY"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="Bentley"
+            />
+        <CheckBox
+            android:id="@+id/checkBox_FAVOURITES"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:text="Favourites"
+            />
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
