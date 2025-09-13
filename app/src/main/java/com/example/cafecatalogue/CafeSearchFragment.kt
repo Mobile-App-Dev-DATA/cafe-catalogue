@@ -59,11 +59,6 @@ class CafeSearchFragment() : Fragment() {
             Log.d("Search fragment","view model data query:${viewModel.query.value} :: suburbs:${viewModel.suburbs.value}")
         }
 
-        viewModel.favouritesOnly.observe(viewLifecycleOwner) { enabled ->
-            listAdapter.setFavouritesFilter(enabled)
-            Log.d("Search fragment","view model data favourites:${viewModel.favouritesOnly.value}")
-        }
-
         return view
     }
 }

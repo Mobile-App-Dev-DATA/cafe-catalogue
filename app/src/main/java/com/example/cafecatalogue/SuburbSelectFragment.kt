@@ -48,7 +48,6 @@ class SuburbSelectFragment : Fragment() {
             Log.d("Suburb select fragment", message)
             viewModel.setSuburbs(selected)
             Log.d("Suburb select fragment","view model data query:${viewModel.query.value} :: suburbs:${viewModel.suburbs.value}")
-            viewModel.setFavouritesOnly(checkBoxFavourites.isChecked)
         }
 
         checkBoxFremantle.setOnCheckedChangeListener { _, _ -> updateFilter() }

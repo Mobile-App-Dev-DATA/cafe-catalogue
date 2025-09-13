@@ -36,12 +36,14 @@ class SearchVM : ViewModel() {
 
     fun setFavourite(cafe:Cafe, isFavourite:Boolean){
         if (isFavourite){
-            @Suppress("UNCHECKED_CAST")
             _favouriteCafeList.value = favouriteCafeList.value!!.plus(cafe.name) as ArrayList<String>
             Log.i("Search VM","$cafe set to favourite")
         }else{
             _favouriteCafeList.value = favouriteCafeList.value!!.filter{ it != cafe.name } as ArrayList<String>
             Log.i("Search VM","$cafe set to not favourite")
+        }
+        if(showingOnlyFavourites){
+            filterCafeList()
         }
     }
 
