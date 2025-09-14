@@ -16,9 +16,9 @@ class SuburbSelectFragment : Fragment() {
     private val viewModel:SearchVM by activityViewModels()
     private lateinit var checkBoxFremantle:CheckBox
     private lateinit var checkBoxNedlands:CheckBox
-    private lateinit var checkBoxWilson:CheckBox
+    private lateinit var checkBoxMtLawley:CheckBox
     private lateinit var checkBoxBentley:CheckBox
-    private lateinit var checkBoxFavourites:CheckBox
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,15 +28,15 @@ class SuburbSelectFragment : Fragment() {
 
         checkBoxFremantle = view.findViewById<CheckBox>(R.id.checkBox_FREMANTLE)
         checkBoxNedlands = view.findViewById<CheckBox>(R.id.checkBox_NEDLANDS)
-        checkBoxWilson = view.findViewById<CheckBox>(R.id.checkBox_WILSON)
+        checkBoxMtLawley = view.findViewById<CheckBox>(R.id.checkBox_MTLAWLEY)
         checkBoxBentley = view.findViewById<CheckBox>(R.id.checkBox_BENTLEY)
-        checkBoxFavourites = view.findViewById<CheckBox>(R.id.checkBox_FAVOURITES)
+
 
         val updateFilter = {
             val selected = mutableSetOf<Suburb>()
             if (checkBoxFremantle.isChecked) selected.add(Suburb.FREMANTLE)
             if (checkBoxNedlands.isChecked) selected.add(Suburb.NEDLANDS)
-            if (checkBoxWilson.isChecked) selected.add(Suburb.WILSON)
+            if (checkBoxMtLawley.isChecked) selected.add(Suburb.MTLAWLEY)
             if (checkBoxBentley.isChecked) selected.add(Suburb.BENTLEY)
 
             //debugging nonsense
@@ -52,9 +52,9 @@ class SuburbSelectFragment : Fragment() {
 
         checkBoxFremantle.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxNedlands.setOnCheckedChangeListener { _, _ -> updateFilter() }
-        checkBoxWilson.setOnCheckedChangeListener { _, _ -> updateFilter() }
+        checkBoxMtLawley.setOnCheckedChangeListener { _, _ -> updateFilter() }
         checkBoxBentley.setOnCheckedChangeListener { _, _ -> updateFilter() }
-        checkBoxFavourites.setOnCheckedChangeListener { _, _ -> updateFilter() }
+
         return view
     }
 }
