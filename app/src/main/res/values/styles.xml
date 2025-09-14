@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Text.Twigs.H1">
+
+    <style name="Text" />
+    <style name="Widget" />
+
+    <style name="Text.Twigs" />
+    <style name="Widget.Twigs" />
+
+    <style name="Text.Twigs.H1" parent="Text.Twigs">
         <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/twigs_text</item>
-        <item name="android:fontFamily">sans-serif</item> <!-- use Inter later if you have it -->
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Text.Twigs.Body">
+    <style name="Text.Twigs.Body" parent="Text.Twigs">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/twigs_text</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="Widget.Twigs.Button">
+    <style name="Widget.Twigs.Button" parent="Widget.Twigs">
         <item name="android:background">@color/twigs_green_mid</item>
         <item name="android:textColor">@color/twigs_white</item>
         <item name="android:fontFamily">sans-serif</item>
