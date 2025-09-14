@@ -61,6 +61,10 @@ class Exploded_view : AppCompatActivity() {
 
         // Favourite VM and favourite list
         val favouriteVM : FavouriteVM by viewModels()
+        // Update VM with received list
+        receievedFavourite?.let { faveList ->
+            favouriteVM.set_favourites(faveList)
+        }
 
         // Extract data from cafe object
         val name = receivedCafe.name
@@ -110,6 +114,7 @@ class Exploded_view : AppCompatActivity() {
 
         Log.d("ExplodedView", "Image set successfully")
 
+        // Function to update button colour
         fun updateFavoriteButton(isFavorite: Boolean) {
             if (isFavorite) {
                 favourite_button.setBackgroundColor(Color.parseColor("#EFBF04"))
@@ -122,8 +127,8 @@ class Exploded_view : AppCompatActivity() {
             }
         }
 
-        // Check if cafe is in favorites and update button
-        val isFavorite = receievedFavourite?.contains(name) == true
+        // Update colour based on VM
+        val isFavorite = favouriteVM.favourite_set.value?.contains(name) == true
         updateFavoriteButton(isFavorite)
 
         // Favourite button
