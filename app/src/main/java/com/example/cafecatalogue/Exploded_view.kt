@@ -19,6 +19,8 @@ import android.util.Log
 
 
 class Exploded_view : AppCompatActivity() {
+
+    private val favouriteVM: FavouriteVM by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,10 +48,10 @@ class Exploded_view : AppCompatActivity() {
         Log.d("ExplodedView", "Bundle: $bundle")
 
         val receivedCafe = bundle?.getParcelable("cafe",Cafe::class.java)
-        val receievedFavourite = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
+        val receivedFavourite = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
 
         Log.d("ExplodedView", "Received cafe: $receivedCafe")
-        Log.d("ExplodedView", "Received favourites: $receievedFavourite")
+        Log.d("ExplodedView", "Received favourites: $receivedFavourite")
 
         if (receivedCafe == null) {
             Log.e("ExplodedView", "Cafe object is null!")
@@ -58,12 +60,8 @@ class Exploded_view : AppCompatActivity() {
         }
 
         Log.d("ExplodedView", "Cafe object is valid, proceeding...")
-
-        // Favourite VM and favourite list
-        val favouriteVM : FavouriteVM by viewModels()
-        // Update VM with received list
-        if (receievedFavourite.isNotEmpty()) {
-            favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
+        if (favouriteVM.favourite_set.value.isNullOrEmpty() && receivedFavourite.isNotEmpty()) {
+            favouriteVM.set_favourites(receivedFavourite)
         }
 
 
@@ -115,6 +113,8 @@ class Exploded_view : AppCompatActivity() {
 
         Log.d("ExplodedView", "Image set successfully")
 
+
+
         // Function to update button colour
         fun updateFavoriteButton(isFavorite: Boolean) {
             if (isFavorite) {
@@ -126,6 +126,11 @@ class Exploded_view : AppCompatActivity() {
                 favourite_button.text = "☆ Fave"
                 favourite_button.setTextColor(Color.BLACK)
             }
+        }
+
+        favouriteVM.favourite_set.observe(this) { favourites ->
+            val isFavorite = favourites.contains(receivedCafe.name)
+            updateFavoriteButton(isFavorite)
         }
 
         // Update colour based on VM
