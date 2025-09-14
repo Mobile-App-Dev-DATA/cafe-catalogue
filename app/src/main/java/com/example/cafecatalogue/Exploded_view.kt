@@ -45,7 +45,7 @@ class Exploded_view : AppCompatActivity() {
         val bundle = intent.extras
         Log.d("ExplodedView", "Bundle: $bundle")
 
-        val receivedCafe = bundle?.getParcelable<Cafe>("cafe")
+        val receivedCafe = bundle?.getParcelable("cafe",Cafe::class.java)
         val receievedFavourite = bundle?.getStringArrayList("favourites")
 
         Log.d("ExplodedView", "Received cafe: $receivedCafe")
@@ -62,9 +62,7 @@ class Exploded_view : AppCompatActivity() {
         // Favourite VM and favourite list
         val favouriteVM : FavouriteVM by viewModels()
         // Update VM with received list
-        receievedFavourite?.let { faveList ->
-            favouriteVM.set_favourites(faveList)
-        }
+        favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
 
         // Extract data from cafe object
         val name = receivedCafe.name
@@ -84,13 +82,13 @@ class Exploded_view : AppCompatActivity() {
         }
 
         // Display suburb and description
-        cafe_suburb.text = suburb?.toString() ?: "Unknown Suburb"
+        cafe_suburb.text = suburb.toString() ?: "Unknown Suburb"
         cafe_description.text = description ?: "No description available"
 
         Log.d("ExplodedView", "Text fields set successfully")
 
         // Display photo
-        val cafeName = name?.lowercase()
+        val cafeName = name.lowercase()
         Log.d("ExplodedView", "Looking for image for: $cafeName")
 
         when(cafeName) {
@@ -138,16 +136,10 @@ class Exploded_view : AppCompatActivity() {
             if(favouriteVM.favourite_set.value?.contains(name) == true) {
                 favouriteVM.setFavourite(receivedCafe, false)
                 Log.d("ExplodedView", "Removed from favourites")
-
-                // Change button colour
-                favouriteVM.setFavourite(receivedCafe, false)
                 updateFavoriteButton(false)
             } else {
                 favouriteVM.setFavourite(receivedCafe, true)
                 Log.d("ExplodedView", "Added to favourites")
-
-                // Change button colour
-                favouriteVM.setFavourite(receivedCafe, true)
                 updateFavoriteButton(true)
 
             }

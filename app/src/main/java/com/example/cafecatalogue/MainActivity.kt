@@ -24,9 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         // Check for bundle from second activity
         val bundle = intent.extras
-        val receivedFavourites = bundle?.getStringArrayList("favourites")
+        val receivedFavourites = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
 
-        if (receivedFavourites != null) {
+        if (receivedFavourites.isNotEmpty()) {
             viewModel.updateFavouriteList(receivedFavourites)
         } else {
             // Fallback to savedInstanceState
@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
         searchFragment = CafeSearchFragment()
-        searchFragment.setRetainInstance(true)
 
         suburbSelectFragment = SuburbSelectFragment()
 
