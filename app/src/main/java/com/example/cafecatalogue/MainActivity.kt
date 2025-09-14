@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import android.content.Intent
+import androidx.lifecycle.ViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,23 +16,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var suburbSelectFragment: SuburbSelectFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("activity creation","creating main activity instance")
+        Log.i("activity creation", "creating main activity instance")
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val viewModel:SearchVM by viewModels()
+        val viewModel: SearchVM by viewModels()
 
         // Check for bundle from second activity
         val bundle = intent.extras
-        val receivedFavourites = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
+        val receivedFavourites = bundle?.getStringArrayList("favourites") ?: ArrayList<String>()
 
         if (receivedFavourites.isNotEmpty()) {
             viewModel.updateFavouriteList(receivedFavourites)
-        } else {
-            // Fallback to savedInstanceState
-            val favouriteList = savedInstanceState?.getStringArrayList("favourites")?:ArrayList<String>()
-            viewModel.updateFavouriteList(favouriteList)
         }
 
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
@@ -58,17 +55,25 @@ class MainActivity : AppCompatActivity() {
              * the comments are code that will only be able to work once the exploded view is written
              */
             val selectedCafe = viewModel.selectedCafe.value
-            if (selectedCafe == null){
-                Log.e("Main activity - activity change","the selected cafe resolved to null.  this should not be possible")
-            }else{
-                val intent:Intent = Intent(this, Exploded_view::class.java)
-                val bundle:Bundle = Bundle()
-                bundle.putStringArrayList("favourites",viewModel.favouriteCafeList.value)
-                bundle.putParcelable("cafe",selectedCafe)
-                Log.i("Main activity - activity change","swapping to the exploded activity with data $bundle")
+            if (selectedCafe == null) {
+                Log.e(
+                    "Main activity - activity change",
+                    "the selected cafe resolved to null.  this should not be possible"
+                )
+            } else {
+                val intent: Intent = Intent(this, Exploded_view::class.java)
+                val bundle: Bundle = Bundle()
+                bundle.putStringArrayList("favourites", viewModel.favouriteCafeList.value)
+                bundle.putParcelable("cafe", selectedCafe)
+                Log.i(
+                    "Main activity - activity change",
+                    "swapping to the exploded activity with data $bundle"
+                )
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
         }
+
+        intent.extras?.clear()
     }
 }

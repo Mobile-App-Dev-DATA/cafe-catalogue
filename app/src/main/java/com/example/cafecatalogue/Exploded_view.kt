@@ -46,7 +46,7 @@ class Exploded_view : AppCompatActivity() {
         Log.d("ExplodedView", "Bundle: $bundle")
 
         val receivedCafe = bundle?.getParcelable("cafe",Cafe::class.java)
-        val receievedFavourite = bundle?.getStringArrayList("favourites")
+        val receievedFavourite = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
 
         Log.d("ExplodedView", "Received cafe: $receivedCafe")
         Log.d("ExplodedView", "Received favourites: $receievedFavourite")
@@ -62,7 +62,10 @@ class Exploded_view : AppCompatActivity() {
         // Favourite VM and favourite list
         val favouriteVM : FavouriteVM by viewModels()
         // Update VM with received list
-        favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
+        if (receievedFavourite.isNotEmpty()) {
+            favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
+        }
+
 
         // Extract data from cafe object
         val name = receivedCafe.name
@@ -154,5 +157,7 @@ class Exploded_view : AppCompatActivity() {
             intent.putExtra("cafe", receivedCafe)
             startActivity(intent)
         }
+
+        intent.extras?.clear()
     }
 }
