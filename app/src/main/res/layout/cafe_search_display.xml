@@ -11,27 +11,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         >
-    <TextView
-        android:id="@+id/CafeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="__cafe name__"
-        />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        <TextView
+            android:id="@+id/CafeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="__cafe name__"
+            style="@style/Text.Twigs.Body"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="fav"
+        style="@style/Text.Twigs.Body"
         />
     <CheckBox
         android:id="@+id/Favourite_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:buttonTint="@color/twigs_green_mid"
         />
 </LinearLayout>
 
