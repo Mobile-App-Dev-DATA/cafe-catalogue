@@ -1,9 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.CafeCatalogue" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.CafeCatalogue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/twigs_green_mid</item>
+        <item name="colorSecondary">@color/twigs_accent1</item>
+        <item name="android:windowBackground">@color/twigs_bg</item>
+        <item name="android:textColor">@color/twigs_text</item>
     </style>
-
-    <style name="Theme.CafeCatalogue" parent="Base.Theme.CafeCatalogue" />
 </resources>
