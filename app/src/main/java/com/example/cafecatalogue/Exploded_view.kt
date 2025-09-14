@@ -29,8 +29,6 @@ class Exploded_view : AppCompatActivity() {
             insets
         }
 
-        Log.d("ExplodedView", "Activity started")
-
         // Get xml data
         val cafe_name = findViewById<TextView>(R.id.cafe_name)
         val cafe_suburb = findViewById<TextView>(R.id.cafe_suburb)
@@ -39,25 +37,16 @@ class Exploded_view : AppCompatActivity() {
         val favourite_button = findViewById<Button>(R.id.favourite_button)
         val back_button = findViewById<Button>(R.id.back_button)
 
-        Log.d("ExplodedView", "Views found successfully")
-
         // Obtain cafe object from bundle
         val bundle = intent.extras
-        Log.d("ExplodedView", "Bundle: $bundle")
-
         val receivedCafe = bundle?.getParcelable<Cafe>("cafe")
         val receievedFavourite = bundle?.getStringArrayList("favourites")
-
-        Log.d("ExplodedView", "Received cafe: $receivedCafe")
-        Log.d("ExplodedView", "Received favourites: $receievedFavourite")
 
         if (receivedCafe == null) {
             Log.e("ExplodedView", "Cafe object is null!")
             finish()
             return
         }
-
-        Log.d("ExplodedView", "Cafe object is valid, proceeding...")
 
         // Favourite VM and favourite list
         val favouriteVM : FavouriteVM by viewModels()
@@ -71,10 +60,6 @@ class Exploded_view : AppCompatActivity() {
         val suburb = receivedCafe.suburb
         val description = receivedCafe.description
 
-        Log.d("ExplodedView", "Cafe name: $name")
-        Log.d("ExplodedView", "Cafe suburb: $suburb")
-        Log.d("ExplodedView", "Cafe description: $description")
-
         // Check if name is null
         if (name == null) {
             Log.e("ExplodedView", "Cafe name is null!")
@@ -84,10 +69,8 @@ class Exploded_view : AppCompatActivity() {
         }
 
         // Display suburb and description
-        cafe_suburb.text = suburb?.toString() ?: "Unknown Suburb"
-        cafe_description.text = description ?: "No description available"
-
-        Log.d("ExplodedView", "Text fields set successfully")
+        cafe_suburb.text = suburb?.toString()
+        cafe_description.text = description
 
         // Display photo
         val cafeName = name?.lowercase()
@@ -106,13 +89,8 @@ class Exploded_view : AppCompatActivity() {
             "secondeli cafe" -> cafe_image.setImageResource(R.drawable.secondeli)
             "common grounds" -> cafe_image.setImageResource(R.drawable.common)
             "basement cafe" -> cafe_image.setImageResource(R.drawable.basement)
-            else -> {
-                Log.d("ExplodedView", "No matching image found for: $cafeName, using default")
-                cafe_image.setImageResource(R.drawable.basement)
-            }
+            else -> cafe_image.setImageResource(R.drawable.basement)
         }
-
-        Log.d("ExplodedView", "Image set successfully")
 
         // Function to update button colour
         fun updateFavoriteButton(isFavorite: Boolean) {
@@ -133,23 +111,12 @@ class Exploded_view : AppCompatActivity() {
 
         // Favourite button
         favourite_button.setOnClickListener {
-            Log.d("ExplodedView", "Favourite button clicked")
-
-            if(favouriteVM.favourite_set.value?.contains(name) == true) {
-                favouriteVM.setFavourite(receivedCafe, false)
-                Log.d("ExplodedView", "Removed from favourites")
-
-                // Change button colour
+            if (favouriteVM.favourite_set.value?.contains(name) == true) {
                 favouriteVM.setFavourite(receivedCafe, false)
                 updateFavoriteButton(false)
             } else {
                 favouriteVM.setFavourite(receivedCafe, true)
-                Log.d("ExplodedView", "Added to favourites")
-
-                // Change button colour
-                favouriteVM.setFavourite(receivedCafe, true)
                 updateFavoriteButton(true)
-
             }
         }
 

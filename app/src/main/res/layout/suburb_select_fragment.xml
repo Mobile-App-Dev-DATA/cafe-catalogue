@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="2"
+        android:layout_marginTop="20dp"
         >
         <CheckBox
             android:id="@+id/checkBox_FREMANTLE"
@@ -14,6 +15,7 @@
             android:layout_columnWeight="1"
             android:layout_height="wrap_content"
             android:text="Fremantle"
+            android:textColor="@color/black"
             />
         <CheckBox
             android:id="@+id/checkBox_NEDLANDS"
@@ -21,6 +23,7 @@
             android:layout_columnWeight="1"
             android:layout_height="wrap_content"
             android:text="Nedlands"
+            android:textColor="@color/black"
             />
         <CheckBox
             android:id="@+id/checkBox_WILSON"
@@ -28,6 +31,7 @@
             android:layout_columnWeight="1"
             android:layout_height="wrap_content"
             android:text="Wilson"
+            android:textColor="@color/black"
             />
         <CheckBox
             android:id="@+id/checkBox_BENTLEY"
@@ -35,6 +39,7 @@
             android:layout_columnWeight="1"
             android:layout_height="wrap_content"
             android:text="Bentley"
+            android:textColor="@color/black"
             />
         <CheckBox
             android:id="@+id/checkBox_FAVOURITES"
@@ -42,6 +47,7 @@
             android:layout_columnWeight="1"
             android:layout_height="wrap_content"
             android:text="Favourites"
+            android:textColor="@color/black"
             />
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
