@@ -19,6 +19,8 @@ import android.util.Log
 
 
 class Exploded_view : AppCompatActivity() {
+
+    private val favouriteVM: FavouriteVM by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,10 +48,10 @@ class Exploded_view : AppCompatActivity() {
         Log.d("ExplodedView", "Bundle: $bundle")
 
         val receivedCafe = bundle?.getParcelable("cafe",Cafe::class.java)
-        val receievedFavourite = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
+        val receivedFavourite = bundle?.getStringArrayList("favourites")?:ArrayList<String>()
 
         Log.d("ExplodedView", "Received cafe: $receivedCafe")
-        Log.d("ExplodedView", "Received favourites: $receievedFavourite")
+        Log.d("ExplodedView", "Received favourites: $receivedFavourite")
 
         if (receivedCafe == null) {
             Log.e("ExplodedView", "Cafe object is null!")
@@ -58,6 +60,10 @@ class Exploded_view : AppCompatActivity() {
         }
 
         Log.d("ExplodedView", "Cafe object is valid, proceeding...")
+        if (favouriteVM.favourite_set.value.isNullOrEmpty() && receivedFavourite.isNotEmpty()) {
+            favouriteVM.set_favourites(receivedFavourite)
+        }
+
 
         // Extract data from cafe object
         val name = receivedCafe.name
@@ -107,8 +113,7 @@ class Exploded_view : AppCompatActivity() {
 
         Log.d("ExplodedView", "Image set successfully")
 
-        // Favourite VM and favourite list
-        val favouriteVM : FavouriteVM by viewModels()
+
 
         // Function to update button colour
         fun updateFavoriteButton(isFavorite: Boolean) {
@@ -123,18 +128,8 @@ class Exploded_view : AppCompatActivity() {
             }
         }
 
-        favouriteVM.favourite_set.observe(this) { favoritesList ->
-            val isFavorite = favoritesList?.contains(name) == true
-            updateFavoriteButton(isFavorite)
-            Log.d("ExplodedView", "Observer triggered - Favorites updated, button state: $isFavorite")
-        }
-
-        if (receievedFavourite.isNotEmpty()) {
-            favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
-        }
-
-        favouriteVM.favourite_set.observe(this) { favoritesList ->
-            val isFavorite = favoritesList?.contains(name) == true
+        favouriteVM.favourite_set.observe(this) { favourites ->
+            val isFavorite = favourites.contains(receivedCafe.name)
             updateFavoriteButton(isFavorite)
         }
 
@@ -144,13 +139,17 @@ class Exploded_view : AppCompatActivity() {
 
         // Favourite button
         favourite_button.setOnClickListener {
-            val currentFavorites = favouriteVM.favourite_set.value ?: ArrayList()
-            val isCurrentlyFavourited = currentFavorites.contains(name)
+            Log.d("ExplodedView", "Favourite button clicked")
 
-            if (isCurrentlyFavourited) {
+            if(favouriteVM.favourite_set.value?.contains(name) == true) {
                 favouriteVM.setFavourite(receivedCafe, false)
+                Log.d("ExplodedView", "Removed from favourites")
+                updateFavoriteButton(false)
             } else {
                 favouriteVM.setFavourite(receivedCafe, true)
+                Log.d("ExplodedView", "Added to favourites")
+                updateFavoriteButton(true)
+
             }
         }
 
@@ -165,11 +164,5 @@ class Exploded_view : AppCompatActivity() {
         }
 
         intent.extras?.clear()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val favouriteVM : FavouriteVM by viewModels()
-        outState.putStringArrayList("current_favourites", favouriteVM.favourite_set.value)
     }
 }

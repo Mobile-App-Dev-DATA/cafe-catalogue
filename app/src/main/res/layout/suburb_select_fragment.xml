@@ -26,11 +26,11 @@
             android:textColor="@color/black"
             />
         <CheckBox
-            android:id="@+id/checkBox_WILSON"
+            android:id="@+id/checkBox_MTLAWLEY"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-            android:text="Wilson"
+            android:text="Mt Lawley"
             android:textColor="@color/black"
             />
         <CheckBox
@@ -41,13 +41,6 @@
             android:text="Bentley"
             android:textColor="@color/black"
             />
-        <CheckBox
-            android:id="@+id/checkBox_FAVOURITES"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:layout_height="wrap_content"
-            android:text="Favourites"
-            android:textColor="@color/black"
-            />
+
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
