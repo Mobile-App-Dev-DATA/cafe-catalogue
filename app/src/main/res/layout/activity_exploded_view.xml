@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main">
+    android:id="@+id/main"
+    android:background="@color/twigs_bg">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,7 +20,6 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp">
 
-
                 <!-- Cafe Name -->
                 <TextView
                     android:id="@+id/cafe_name"
@@ -31,8 +31,7 @@
                     android:layout_marginEnd="8dp"
                     android:hint="Cafe Name"
                     android:maxLines="2"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
+                    style="@style/Text.Twigs.H1" />
 
                 <!-- Cafe Suburb -->
                 <TextView
@@ -43,8 +42,7 @@
                     android:layout_toStartOf="@id/button_container"
                     android:layout_marginTop="4dp"
                     android:hint="suburb"
-                    android:textSize="16sp"
-                    android:textColor="#666666" />
+                    style="@style/Text.Twigs.Body" />
 
                 <LinearLayout
                     android:id="@+id/button_container"
@@ -62,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:text="X"
-                        android:textSize="16sp" />
+                        style="@style/Widget.Twigs.Button" />
 
                     <!-- Favourite Button -->
                     <Button
@@ -71,11 +69,9 @@
                         android:layout_height="wrap_content"
                         android:minWidth="80dp"
                         android:text="★ Fave"
-                        android:textSize="14sp" />
+                        style="@style/Widget.Twigs.Button" />
 
                 </LinearLayout>
-
-
             </RelativeLayout>
 
             <TextView
@@ -84,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:hint="Description"
-                android:textSize="16sp"/>
+                style="@style/Text.Twigs.Body" />
 
             <ImageView
                 android:id="@+id/cafe_image"
