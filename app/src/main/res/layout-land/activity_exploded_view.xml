@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <!-- Left side: Cafe info -->
+    <!-- Left side: Cafe image -->
     <ImageView
         android:id="@+id/cafe_image"
         android:layout_width="0dp"
@@ -15,7 +15,7 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
 
-    <!-- Right side: Cafe image -->
+    <!-- Right side: Cafe info -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -55,8 +55,8 @@
                     android:layout_toStartOf="@id/button_container"
                     android:layout_marginTop="4dp"
                     android:hint="suburb"
-                    android:textSize="16sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/twigs_accent1"
+                    style="@style/Text.Twigs.Body" />
 
                 <!-- Buttons on the right -->
                 <LinearLayout
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:hint="Description"
-                android:textSize="16sp"/>
+                style="@style/Text.Twigs.Body"/>
 
         </LinearLayout>
     </ScrollView>
