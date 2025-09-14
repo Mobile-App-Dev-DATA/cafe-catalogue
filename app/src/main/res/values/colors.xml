@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="twigs_bg">#F5EEE6</color>
+    <color name="twigs_text">#212806</color>
+    <color name="twigs_accent1">#8C6E50</color>
+    <color name="twigs_accent2">#B48D62</color>
+    <color name="twigs_green_mid">#424928</color>
+    <color name="twigs_white">#FFFFFF</color>
 </resources>
