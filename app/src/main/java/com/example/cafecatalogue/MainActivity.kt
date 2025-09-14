@@ -20,11 +20,19 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val favouriteList = savedInstanceState?.getStringArrayList("favourites")?:ArrayList<String>()
-
         val viewModel:SearchVM by viewModels()
-        viewModel.updateFavouriteList(favouriteList)
 
+        // Check for bundle from second activity
+        val bundle = intent.extras
+        val receivedFavourites = bundle?.getStringArrayList("favourites")
+
+        if (receivedFavourites != null) {
+            viewModel.updateFavouriteList(receivedFavourites)
+        } else {
+            // Fallback to savedInstanceState
+            val favouriteList = savedInstanceState?.getStringArrayList("favourites")?:ArrayList<String>()
+            viewModel.updateFavouriteList(favouriteList)
+        }
 
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 

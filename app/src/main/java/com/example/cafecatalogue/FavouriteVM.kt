@@ -22,12 +22,11 @@ class FavouriteVM : ViewModel() {
      * This one can set to either using boolean parameter
      */
     fun setFavourite(cafe: Cafe?, isFavourite: Boolean) {
-        if (isFavourite) {
+        if (isFavourite && favourite_set.value?.contains(cafe?.name) == false) {
             _favourite_set.value = favourite_set.value!!.plus(cafe?.name) as ArrayList<String>
             Log.i("Search VM", "$cafe set to favourite")
         } else {
-            _favourite_set.value =
-                favourite_set.value!!.filter { it != cafe?.name } as ArrayList<String>
+            _favourite_set.value = ArrayList(favourite_set.value!!.filter { it != cafe?.name })
             Log.i("Search VM", "$cafe set to not favourite")
         }
     }
