@@ -26,8 +26,7 @@ class FavouriteVM : ViewModel() {
             _favourite_set.value = favourite_set.value!!.plus(cafe?.name) as ArrayList<String>
             Log.i("Search VM", "$cafe set to favourite")
         } else {
-            _favourite_set.value =
-                favourite_set.value!!.filter { it != cafe?.name } as ArrayList<String>
+            _favourite_set.value = ArrayList(favourite_set.value!!.filter { it != cafe?.name })
             Log.i("Search VM", "$cafe set to not favourite")
         }
     }

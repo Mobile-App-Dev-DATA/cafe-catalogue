@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
+import android.graphics.Color
 import android.widget.Button
 import android.util.Log
 
@@ -60,6 +61,10 @@ class Exploded_view : AppCompatActivity() {
 
         // Favourite VM and favourite list
         val favouriteVM : FavouriteVM by viewModels()
+        // Update VM with received list
+        receievedFavourite?.let { faveList ->
+            favouriteVM.set_favourites(faveList)
+        }
 
         // Extract data from cafe object
         val name = receivedCafe.name
@@ -109,18 +114,43 @@ class Exploded_view : AppCompatActivity() {
 
         Log.d("ExplodedView", "Image set successfully")
 
-        favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
+        // Function to update button colour
+        fun updateFavoriteButton(isFavorite: Boolean) {
+            if (isFavorite) {
+                favourite_button.setBackgroundColor(Color.parseColor("#EFBF04"))
+                favourite_button.text = "★ Faved"
+                favourite_button.setTextColor(Color.WHITE)
+            } else {
+                favourite_button.setBackgroundColor(Color.parseColor("#ff5a595b"))
+                favourite_button.text = "☆ Fave"
+                favourite_button.setTextColor(Color.BLACK)
+            }
+        }
+
+        // Update colour based on VM
+        val isFavorite = favouriteVM.favourite_set.value?.contains(name) == true
+        updateFavoriteButton(isFavorite)
+
         // Favourite button
         favourite_button.setOnClickListener {
             Log.d("ExplodedView", "Favourite button clicked")
+
             if(favouriteVM.favourite_set.value?.contains(name) == true) {
                 favouriteVM.setFavourite(receivedCafe, false)
                 Log.d("ExplodedView", "Removed from favourites")
+
+                // Change button colour
+                favouriteVM.setFavourite(receivedCafe, false)
+                updateFavoriteButton(false)
             } else {
                 favouriteVM.setFavourite(receivedCafe, true)
                 Log.d("ExplodedView", "Added to favourites")
+
+                // Change button colour
+                favouriteVM.setFavourite(receivedCafe, true)
+                updateFavoriteButton(true)
+
             }
-            Log.d("ExplodedView","current favourites ${favouriteVM.favourite_set.value}")
         }
 
         // Back button
