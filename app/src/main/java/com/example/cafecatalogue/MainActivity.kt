@@ -19,17 +19,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        val favouriteList = savedInstanceState?.getStringArrayList("favourites")?:ArrayList<String>()
-
         val viewModel:SearchVM by viewModels()
-        viewModel.updateFavouriteList(favouriteList)
+
+        var favouriteList = intent.getStringArrayListExtra("favourites")?:ArrayList<String>()
+        if (favouriteList.isEmpty()) {
+            favouriteList = savedInstanceState?.getStringArrayList("favourites")?:ArrayList<String>()
+        }
+        if (favouriteList.isNotEmpty()) {
+            viewModel.updateFavouriteList(favouriteList)
+        }
 
 
         val pageView = findViewById<ViewPager2>(R.id.MainViewPager)
 
         searchFragment = CafeSearchFragment()
-        searchFragment.setRetainInstance(true)
 
         suburbSelectFragment = SuburbSelectFragment()
 

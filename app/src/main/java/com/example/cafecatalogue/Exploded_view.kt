@@ -109,17 +109,18 @@ class Exploded_view : AppCompatActivity() {
 
         Log.d("ExplodedView", "Image set successfully")
 
+        favouriteVM.set_favourites(receievedFavourite?:ArrayList<String>())
         // Favourite button
         favourite_button.setOnClickListener {
             Log.d("ExplodedView", "Favourite button clicked")
-
-            if(receievedFavourite?.contains(name) == true) {
+            if(favouriteVM.favourite_set.value?.contains(name) == true) {
                 favouriteVM.setFavourite(receivedCafe, false)
                 Log.d("ExplodedView", "Removed from favourites")
             } else {
                 favouriteVM.setFavourite(receivedCafe, true)
                 Log.d("ExplodedView", "Added to favourites")
             }
+            Log.d("ExplodedView","current favourites ${favouriteVM.favourite_set.value}")
         }
 
         // Back button
